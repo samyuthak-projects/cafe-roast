@@ -22,7 +22,8 @@ while running:
 
     customer = create_customer()
 
-    print(f"{customer['name']} wants a {customer['order']}.")
+    print(f"{customer['name']}: {customer['greeting']}")
+    print(f"Order: {customer['order']}")
 
     print("\nWhat would you like to do?")
     print("\n-menu")
@@ -41,7 +42,6 @@ while running:
         brewed_drink = input("Which drink would you like to brew?\n> ").lower()
 
         if brewed_drink == customer["order"]:
-
             reward = DRINKS[brewed_drink]
             coins += reward
             print(f"Perfect! You brewed a {brewed_drink} and earned {reward} coins!")
@@ -52,6 +52,9 @@ while running:
     elif command == "quit":
          
          running = False
+
+    else:
+        print("⚠ Invalid command")
 
 print("\nCafe Roast is closed for the day. Thanks for playing!")
     
