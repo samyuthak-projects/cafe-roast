@@ -3,7 +3,15 @@ from drinks import DRINKS
 
 coins = 20
 
-print("☕ Welcome to Cafe Roast! ☕")
+print("""
+☕══════════════════════☕
+
+      CAFE ROAST
+
+☕══════════════════════☕
+""")
+
+print("Welcome to Cafe Roast! As the barista, your job is to brew delicious coffee for your customers and earn coins. Each customer will order a drink from the menu, and you can choose to brew it or check the menu. Brew the correct drink to earn coins, but be careful - brewing the wrong drink won't earn you anything! Type 'menu' to see the menu, 'brew' to brew a drink, or 'quit' to end the game. Good luck!")
 
 running = True
 
