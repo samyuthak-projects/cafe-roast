@@ -1,0 +1,45 @@
+import random
+from customers import create_customer
+from drinks import DRINKS
+
+class Cafe:
+    def __init__(self):
+        
+        self.coins = 20
+        self.reputation = 1
+        self.current_customer = None
+
+        print("""
+        ☕══════════════════════☕
+
+            CAFE ROAST
+
+        ☕══════════════════════☕
+        """)
+
+        print("Welcome to Cafe Roast! As the barista, your job is to brew delicious coffee for your customers and earn coins. Each customer will order a drink from the menu, and you can choose to brew it or check the menu. Brew the correct drink to earn coins, but be careful - brewing the wrong drink won't earn you anything! Type 'menu' to see the menu, 'brew' to brew a drink, or 'quit' to end the game. Good luck!")
+
+    def new_customer(self):
+        self.current_customer = create_customer()
+        return self.current_customer
+    
+    def serve(self, drink):
+        if self.current_customer is None:
+            return "No customer to serve!"
+        
+        if drink == self.current_customer["order"]:
+            reward = DRINKS[drink]
+            self.coins += reward
+            self.reputation += 1
+
+            tip = random.randint(0, 3)
+            self.coins += tip
+
+            return f"Perfect! +{reward} coins and + {tip} tip!"
+        
+        else:
+            self.reputation -= 1
+            return f"❌ Wrong order! The customer wanted a {self.current_customer['order']}. No coins earned."
+        
+
+Cafe = Cafe()
