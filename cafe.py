@@ -6,6 +6,7 @@ class Cafe:
     def __init__(self):
         
         self.coins = 20
+        self.drinks = list(DRINKS.keys())
         self.reputation = 1
         self.current_customer = None
 
@@ -25,10 +26,13 @@ class Cafe:
             tip = random.randint(0, 3)
             self.coins += tip
 
+            self.current_customer = None
+
             return f"Perfect! +{reward} coins and + {tip} tip!"
         
         else:
-            self.reputation -= 1
+            self.reputation = max(0, self.reputation - 1)
+            self.current_customer = None
             return f"❌ Wrong order! The customer wanted a {self.current_customer['order']}. No coins earned."
         
 

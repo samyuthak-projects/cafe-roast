@@ -6,33 +6,45 @@ class CafeRoastUI:
 
         self.window = tk.Tk()
         self.window.title("☕ Cafe Roast")
-        self.window.geometry("600x500")
+        self.window.geometry("700x500")
+        self.window.configure(bg="#2b1d17")
 
-        self.label = tk.Label(self.window, text="Welcome to Cafe Roast!", font=("Arial", 14))
+        self.label = tk.Label(self.window, text="Welcome to Cafe Roast!", font=("Helvetica", 16, "bold"), bg="#2b1d17", fg="#f5e6d3")
         self.label.pack(pady=20)
 
-        self.info = tk.Label(self.window, text="")
+        self.info = tk.Label(self.window, text="", font=("Helvetica", 12), bg="#2b1d17", fg="#dbc1ac")
         self.info.pack(pady=10)
 
         self.button_frame = tk.Frame(self.window)
         self.button_frame.pack()
 
-        self.brew_button = tk.Button(self.button_frame, text="Brew Latte", command=self.brew_latte)
-        self.brew_button.grid(row=2, column=1, padx=5)
+        self.drink_buttons = []
 
-        self.brew_button = tk.Button(self.button_frame, text="Brew Mocha", command=self.brew_mocha)
-        self.brew_button.grid(row=3, column=1, padx=5)
+        row_num = 2
 
-        self.brew_button = tk.Button(self.button_frame, text="Brew Cappuccino", command=self.brew_cappuccino)
-        self.brew_button.grid(row=4, column=1, padx=5)
+        for drink in self.cafe.drinks:
 
-        self.brew_button = tk.Button(self.button_frame, text="Brew Espresso", command=self.brew_espresso)
-        self.brew_button.grid(row=5, column=1, padx=5)
+            button = tk.Button(
+                self.button_frame,
+                text=f"Brew {drink.title()}",
+                command=lambda d=drink: self.brew_drink(d),
+                bg="#6f4e37",
+                fg="white",
+                activebackground="#8b5e3c",
+                font=("Helvetica", 10, "bold"),
+                width=18
+            )
 
-        self.new_customer_button = tk.Button(self.button_frame, text="New Customer", command=self.new_customer)
+            button.grid(row=row_num, column=1, pady=5)
+
+            self.drink_buttons.append(button)
+
+            row_num += 1
+
+        self.new_customer_button = tk.Button(self.button_frame, text="New Customer", command=self.new_customer, bg="#4a90e2", fg="white", activebackground="#357ab8", font=("Helvetica", 10, "bold"), width=18)
         self.new_customer_button.grid(row=0, column=1, padx=5)
 
-        self.quit_button = tk.Button(self.button_frame, text="Quit", command=self.window.quit)
+        self.quit_button = tk.Button(self.button_frame, text="Quit", command=self.window.quit, bg="#dc3545", fg="white", activebackground="#c82333", font=("Helvetica", 10, "bold"), width=18)
         self.quit_button.grid(row=6, column=1, padx=5)
 
         self.update_ui()
@@ -44,23 +56,8 @@ class CafeRoastUI:
         customer = self.cafe.new_customer()
         self.label.config(text=f"{customer['name']} says: {customer['greeting']} (Wants: {customer['order']})")
 
-    def brew_latte(self):
-        result = self.cafe.serve("latte")
-        self.label.config(text=result)
-        self.update_ui()
-
-    def brew_mocha(self):
-        result = self.cafe.serve("mocha")
-        self.label.config(text=result)
-        self.update_ui()
-
-    def brew_cappuccino(self):
-        result = self.cafe.serve("cappuccino")
-        self.label.config(text=result)
-        self.update_ui()
-
-    def brew_espresso(self):
-        result = self.cafe.serve("espresso")
+    def brew_drink(self, drink):
+        result = self.cafe.serve(drink)
         self.label.config(text=result)
         self.update_ui()
 
