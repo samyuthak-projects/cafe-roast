@@ -3,6 +3,14 @@ from customers import create_customer
 from drinks import DRINKS
 import json
 
+WEATHER = [
+    "🌧 Rainy",
+    "☀ Sunny",
+    "🌙 Calm Night",
+    "🌫 Foggy",
+    "⛈ Stormy"
+]
+
 class Cafe:
     def __init__(self):
         
@@ -10,6 +18,7 @@ class Cafe:
         self.drinks = list(DRINKS.keys())
         self.reputation = 1
         self.current_customer = None
+        self.weather = random.choice(WEATHER)
         self.load_game()
 
     def new_customer(self):

@@ -1,4 +1,6 @@
 import tkinter as tk
+from customers import CAFE_QUOTES
+import random
 
 class CafeRoastUI:
     def __init__(self, cafe):
@@ -17,6 +19,9 @@ class CafeRoastUI:
 
         self.button_frame = tk.Frame(self.window)
         self.button_frame.pack()
+
+        self.quote_label = tk.Label(self.window, text=random.choice(CAFE_QUOTES), bg="#2b1d17", fg="#dbc1ac", font=("Helvetica", 10, "italic"))
+        self.quote_label.pack(pady=10)
 
         self.drink_buttons = []
 
@@ -45,13 +50,13 @@ class CafeRoastUI:
         self.new_customer_button.grid(row=0, column=1, padx=5)
 
         self.quit_button = tk.Button(self.button_frame, text="Quit", command=self.window.quit, bg="#dc3545", fg="white", activebackground="#c82333", font=("Helvetica", 10, "bold"), width=18)
-        self.quit_button.grid(row=6, column=1, padx=5)
+        self.quit_button.grid(row=8, column=1, padx=5)
 
         self.update_ui()
 
     def update_ui(self):
         stars = "★" * self.cafe.reputation
-        self.info.config(text=f"Coins: {self.cafe.coins} | Reputation: {stars}")
+        self.info.config(text=f"Coins: {self.cafe.coins} | Reputation: {stars} | Weather: {self.cafe.weather}")
 
     def new_customer(self):
         customer = self.cafe.new_customer()
