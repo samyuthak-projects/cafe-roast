@@ -50,7 +50,8 @@ class CafeRoastUI:
         self.update_ui()
 
     def update_ui(self):
-        self.info.config(text=f"Coins: {self.cafe.coins} | Reputation: {self.cafe.reputation}")
+        stars = "★" * self.cafe.reputation
+        self.info.config(text=f"Coins: {self.cafe.coins} | Reputation: {stars}")
 
     def new_customer(self):
         customer = self.cafe.new_customer()
