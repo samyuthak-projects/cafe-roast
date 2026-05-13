@@ -20,6 +20,13 @@ class Cafe:
         if self.current_customer is None:
             return "No customer to serve!"
         
+        event_chance = random.randint(1, 5)
+
+        if event_chance == 1:
+            bonus = random.randint(5, 25)
+            self.coins += bonus
+            return f"✨ A food critic visited! Bonus +{bonus} coins!"
+        
         if drink == self.current_customer["order"]:
             reward = DRINKS[drink]
             self.coins += reward
